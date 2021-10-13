@@ -18,7 +18,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2 
     - name: dependencies
-      run: pip install libbenchmark-dev
+      run: sudo apt install libbenchmark-dev
+           pip install conan
     - name: configure
       env:
         CC: ${{ matrix.compiler }}
