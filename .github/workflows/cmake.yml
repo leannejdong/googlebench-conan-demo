@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2 
     - name: dependencies
-      run: sudo apt install libeigen3-dev
+      run: pip install libbenchmark-dev
     - name: configure
       env:
         CC: ${{ matrix.compiler }}
