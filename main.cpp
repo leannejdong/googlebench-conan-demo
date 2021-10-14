@@ -38,10 +38,19 @@ static void BenchmarkTestTwo(benchmark::State& state) {
     }
 }
 
+static void BM_StringCompare(benchmark::State& state) {
+  std::string s1(state.range(0), '-');
+  std::string s2(state.range(0), '-');
+  for (auto _ : state) {
+    benchmark::DoNotOptimize(s1.compare(s2));
+  }
+  state.SetComplexityN(state.range(0));
+}
+
 // Register the function as a benchmark
 BENCHMARK(BenchmarkTestOne);
 BENCHMARK(BenchmarkTestTwo);
-
+BENCHMARK(BM_StringCompare)->RangeMultiplier(2)->Range(1<<10, 1<<18)->Complexity([](benchmark::IterationCount n)->double{return n; });
 
 // Run the benchmark
 BENCHMARK_MAIN();
